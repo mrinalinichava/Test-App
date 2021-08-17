@@ -41,6 +41,7 @@
 						<region>us-east-2</region>
 						<workers>1</workers>
 						<objectStoreV2>true</objectStoreV2>
+						<artifact>${mule.artifact}</artifact>
 					</cloudHubDeployment>				
 				</configuration>
 			</plugin>
