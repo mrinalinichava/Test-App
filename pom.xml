@@ -50,7 +50,7 @@
 				<artifactId>dependency-check-maven</artifactId>
 				<version>5.2.4</version>
 				<configuration>
-					<failBuildOnCVSS>50</failBuildOnCVSS>
+					<failBuildOnCVSS>5</failBuildOnCVSS>
 				</configuration>
 				<executions>
 					<execution>
