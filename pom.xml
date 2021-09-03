@@ -45,7 +45,22 @@
 					</cloudHubDeployment>				
 				</configuration>
 			</plugin>
-		</plugins>
+			<plugin>
+				<groupId>org.owasp</groupId>
+				<artifactId>dependency-check-maven</artifactId>
+				<version>5.2.4</version>
+				<configuration>
+					<failBuildOnCVSS>5</failBuildOnCVSS>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			</plugins>
 	</build>
 
 	<dependencies>
@@ -99,21 +114,6 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</pluginRepository>
-		<pluginRepository>
-			<groupId>org.owasp</groupId>
-			<artifactId>dependency-check-maven</artifactId>
-			<version>5.2.4</version>
-			<configuration>
-				<failBuildOnCVSS>5</failBuildOnCVSS>
-			</configuration>
-			<executions>
-				<execution>
-					<goals>
-						<goal>check</goal>
-					</goals>
-				</execution>
-			</executions>
 		</pluginRepository>
 	</pluginRepositories>
 
