@@ -21,6 +21,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
+      - name: dependency scanning
+        run: mvn dependency-check:check
       - name: Build
         run: mvn clean install --file pom.xml
       - name: Stamp artifact file name with commit hash
@@ -33,25 +35,25 @@ jobs:
         with:
           name: artifacts
           path: target/*.jar
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-      - uses: actions/download-artifact@master
-        with:
-          name: artifacts
-      - name: Deploy to CloudHub
-        env:
-          USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
-          PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
-        run: |
-          artifactName=$(ls *.jar | head -1)
-          mvn clean package deploy -DmuleDeploy -Dmule.artifact=$artifactName -Danypoint.userName="$USERNAME" -Danypoint.password="$PASSWORD"
+#   deploy:
+#     needs: build
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/cache@v1
+#         with:
+#           path: ~/.m2/repository
+#           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+#           restore-keys: |
+#             ${{ runner.os }}-maven-
+#       - uses: actions/download-artifact@master
+#         with:
+#           name: artifacts
+#       - name: Deploy to CloudHub
+#         env:
+#           USERNAME: ${{ secrets.ANYPOINT_USERNAME }}
+#           PASSWORD: ${{ secrets.ANYPOINT_PASSWORD }}
+#         run: |
+#           artifactName=$(ls *.jar | head -1)
+#           mvn clean package deploy -DmuleDeploy -Dmule.artifact=$artifactName -Danypoint.userName="$USERNAME" -Danypoint.password="$PASSWORD"
  
