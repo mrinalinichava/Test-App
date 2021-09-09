@@ -1,8 +1,6 @@
 # This workflow will build a MuleSoft project and deploy to CloudHub
 name: Test-app cicd example
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
     types: [closed]
