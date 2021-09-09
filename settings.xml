@@ -257,7 +257,7 @@ under the License.
 		
 		<id>sonar</id>
         <activation>
-			<activeByDefault>true</activateByDefault>
+			<activeByDefault>true</activeByDefault>
         </activation>
 		<properties>
 			<sonar.host.url>http://ec2-44-192-64-168.compute-1.amazonaws.com:9000</sonar.host.url>
