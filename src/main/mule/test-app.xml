@@ -9,7 +9,7 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 	</http:listener-config>
 	<flow name="test-appFlow" doc:id="f9cb4188-5638-4371-a7bc-222f103e982d" >
 		<http:listener doc:name="Listener" doc:id="f82dd2b5-a125-4c34-8999-022ffcdcf74f" config-ref="HTTP_Listener_config" path="/hellotest"/>
-		<set-payload value="Hello SONAR Test" doc:name="Set Payload" doc:id="bac6d5fb-b0fd-4f19-ab5e-27534348c108" />
+		<set-payload value="Hello billy Test" doc:name="Set Payload" doc:id="bac6d5fb-b0fd-4f19-ab5e-27534348c108" />
 		<logger level="INFO" doc:name="Logger" doc:id="d0c90f06-7247-4a89-b092-4d9db1fccb0a" message="#[payload]"/>
 	</flow>
 </mule>
