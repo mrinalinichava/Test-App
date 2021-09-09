@@ -3,10 +3,9 @@ on:
   # Trigger analysis when pushing in master or pull requests, and when creating
   # a pull request.
   pull_request:
+    branches: [main]
     types:
       - opened
-      - synchronize
-      - reopened
 
 jobs:
   build:
@@ -21,18 +20,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-#       - name: Cache Maven packages
-#         uses: actions/cache@v1
-#         with:
-#           path: ~/.m2
-#           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-#           restore-keys: ${{ runner.os }}-m2
-#       - name: Cache SonarCloud packages
-#         uses: actions/cache@v1
-#         with:
-#           path: ~/.sonar/cache
-#           key: ${{ runner.os }}-sonar
-#           restore-keys: ${{ runner.os }}-sonar
       - name: Build and analyze
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -DskipTests -s settings.xml
         env:
