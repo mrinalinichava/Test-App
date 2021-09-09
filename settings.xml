@@ -256,17 +256,19 @@ under the License.
 	<profile>
 		
 		<id>sonar</id>
-
         <activation>
 			<activeByDefault>true</activateByDefault>
         </activation>
 		<properties>
 			<sonar.host.url>http://ec2-44-192-64-168.compute-1.amazonaws.com:9000</sonar.host.url>
-			<sonar.login>token Create in step #2</sonar.login>
+			<sonar.login>deeabed5497c362a58cc610f23144c193be4ee7c</sonar.login>
 		</properties>
 	</profile>
   </profiles>
-
+ 
+  <activeProfiles>
+    <activeProfile>sonar</activeProfile>
+  </activeProfiles>
   <!-- activeProfiles
    | List of profiles that are active for all builds.
    |
