@@ -17,7 +17,7 @@ jobs:
       with:
         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
         login: "deeabed5497c362a58cc610f23144c193be4ee7c"
-#         projectBaseDir: "/path/to/my-custom-project"
+        projectBaseDir: ./test-app1
 #         projectKey: "my-custom-project"
 #         projectName: "my-custom-project-name"
 #         projectVersion: "v0.0.1"
