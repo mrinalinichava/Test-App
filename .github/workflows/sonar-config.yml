@@ -18,6 +18,9 @@ jobs:
         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
         login: "deeabed5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app1
+        projectKey: "proj-1"
+        projectName: "bame-1"
+        projectVersion: "v0.0.1"
         
         
   sonarQubeTrigger-1:
@@ -31,10 +34,9 @@ jobs:
         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
         login: "deeabed5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app2      
-  
-#         projectKey: "my-custom-project"
-#         projectName: "my-custom-project-name"
-#         projectVersion: "v0.0.1"
+        projectKey: "proj-2"
+        projectName: "bame-2"
+        projectVersion: "v0.0.1"
 # jobs:
 #   build:
 #     name: Build
