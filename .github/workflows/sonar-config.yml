@@ -18,6 +18,20 @@ jobs:
         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
         login: "deeabed5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app1
+        
+        
+  sonarQubeTrigger-1:
+    name: SonarQube Trigger-1
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@v1.1.0
+      with:
+        host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
+        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
+        projectBaseDir: ./test-app2      
+  
 #         projectKey: "my-custom-project"
 #         projectName: "my-custom-project-name"
 #         projectVersion: "v0.0.1"
