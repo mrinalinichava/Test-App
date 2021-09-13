@@ -62,8 +62,8 @@ jobs:
     - name: SonarQube Scan
       uses: kitabisa/sonarqube-action@v1.1.0
       with:
-        host: "server-url"
-        login: "key"
+        host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
+        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app1
         projectKey: "proj-1"
         projectName: "name-1"
@@ -83,8 +83,8 @@ jobs:
     - name: SonarQube Scan
       uses: kitabisa/sonarqube-action@v1.1.0
       with:
-        host: "server-url"
-        login: "key"
+        host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
+        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app2
         projectKey: "proj-2"
         projectName: "name-2"
@@ -105,8 +105,8 @@ jobs:
     - name: SonarQube Scan
       uses: kitabisa/sonarqube-action@v1.1.0
       with:
-        host: "server-url"
-        login: "key"
+        host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
+        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app3
         projectKey: "proj-3"
         projectName: "name-3"
