@@ -1,39 +1,39 @@
-# This is a workflow to automate deployment for ecom APIs
-name: Deployment Pipeline
+# # This is a workflow to automate deployment for ecom APIs
+# name: Deployment Pipeline
 
-on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  pull_request:
-    branches:  
-      - main 
-    types: [ opened ]
-# Allows you to run this workflow manually from the Actions tab
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build
+# on:
+#   # Triggers the workflow on push or pull request events but only for the master branch
+#   pull_request:
+#     branches:  
+#       - main 
+#     types: [ opened ]
+# # Allows you to run this workflow manually from the Actions tab
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   # This workflow contains a single job called "build
          
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+#       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     
-# Experience API job
-  ExperienceAPI-Job:
-    if: ${ github.event.pull_request.opened == true}}
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: SonarQube Scan
-      uses: kitabisa/sonarqube-action@v1.1.0
-      with:
-        host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
-        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
-        projectBaseDir: ./test-app1
-#         projectKey: "my-custom-project"
-#         projectName: "my-custom-project-name"
-#         projectVersion: "v0.0.1"
-      env:
-          # Needed to get some information about the pull request, if any
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+# # Experience API job
+#   ExperienceAPI-Job:
+#     if: ${ github.event.pull_request.opened == true}}
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@master
+#     - name: SonarQube Scan
+#       uses: kitabisa/sonarqube-action@v1.1.0
+#       with:
+#         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
+#         login: "deeabed5497c362a58cc610f23144c193be4ee7c"
+#         projectBaseDir: ./test-app1
+# #         projectKey: "my-custom-project"
+# #         projectName: "my-custom-project-name"
+# #         projectVersion: "v0.0.1"
+#       env:
+#           # Needed to get some information about the pull request, if any
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
+#         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       
       
         
