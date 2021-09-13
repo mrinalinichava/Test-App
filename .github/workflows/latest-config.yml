@@ -16,6 +16,7 @@ jobs:
     
 # Experience API job
   ExperienceAPI-Job:
+    if: ${ github.event.pull_request.opened == true}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -62,7 +63,7 @@ jobs:
         
           
   SystemAPI-Job:
-    if: ${{needs.PreJob-Requirement.outputs.SystemAPI=='true' && github.event.pull_request.merged == true}}
+    if: ${ github.event.pull_request.opened == true}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
