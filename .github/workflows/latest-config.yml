@@ -1,0 +1,147 @@
+# This is a workflow to automate deployment for ecom APIs
+name: Deployment Pipeline
+
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  pull_request:
+    branches:  
+      - sonar-changes 
+    types: [ opened ]
+# Allows you to run this workflow manually from the Actions tab
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  PreJob-Requirement:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    outputs:
+      ExperienceAPI: ${{steps.check.outputs.ExpFlag}}
+      ProcessAPI: ${{steps.check.outputs.ProcessFlag}}
+      SystemAPI: ${{steps.check.outputs.SystemFlag}}
+      DEPLOYMENT_ENV: ${{env.DEPLOYMENT_ENV}}
+      MULE_ENV: ${{env.MULE_ENV}}
+      client_id: ${{env.client_id}}
+      client_secret: ${{env.client_secret}}
+      
+# Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Get branch name (pull request)
+        if: github.event_name == 'pull_request'
+        shell: bash
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_BASE_REF} | tr / -)" >> $GITHUB_ENV
+
+      - name: Set env variables for DEV environment
+        if: ${{env.BRANCH_NAME == 'develop'}}
+        shell: bash
+        run: |
+         echo "DEPLOYMENT_ENV=$(echo 'DEV')" >> $GITHUB_ENV
+         echo "MULE_ENV=$(echo 'DEV')" >> $GITHUB_ENV
+         echo "client_id=$(echo '538c1409ab1c42a78c2d78dc67c966b1')" >> $GITHUB_ENV
+         echo "client_secret=$(echo 'a827c0698d194Bd289510A1FCD73651A')" >> $GITHUB_ENV
+         
+      - name: Set env variables for QA environment
+        if: ${{env.BRANCH_NAME == 'qa'}}
+        shell: bash
+        run: |
+         echo "DEPLOYMENT_ENV=$(echo 'QA')" >> $GITHUB_ENV
+         echo "MULE_ENV=$(echo 'QA')" >> $GITHUB_ENV
+         echo "client_id=$(echo '7df463eb3fa147578f6e1fcaf9c7f44c')" >> $GITHUB_ENV
+         echo "client_secret=$(echo 'Bd1b3546Dc3140c4a1a0870960D69cf7')" >> $GITHUB_ENV
+         
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: checkout_of_repository
+        uses: actions/checkout@v2
+      - name: file_changes
+        id: file_changes
+        uses: dorny/paths-filter@v2
+        with:
+         filters: |
+           experienceAPI:
+             - sgi-ecom-exp-api/**
+           processAPI:
+             - sgi-ecom-proc-api/**
+           systemAPI:
+             - sgi-ecom-sys-api/**
+      - name: check_for_APIchange
+        id: check
+        env:
+          Experience: ${{steps.file_changes.outputs.experienceAPI}}
+          Process: ${{steps.file_changes.outputs.processAPI}}
+          System: ${{steps.file_changes.outputs.systemAPI}}
+        run: |
+          echo " Change in Experience API $Experience"
+          echo " Change in Process API $Process"
+          echo " Change in System API $System"
+          echo "::set-output name=ExpFlag::$Experience"
+          echo "::set-output name=ProcessFlag::$Process"
+          echo "::set-output name=SystemFlag::$System"
+# Experience API job
+  ExperienceAPI-Job:
+    needs: [ PreJob-Requirement ]
+    if: ${{needs.PreJob-Requirement.outputs.ExperienceAPI=='true' && github.event.pull_request.merged == true}}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@v1.1.0
+      with:
+        host: "server-url"
+        login: "key"
+#         projectBaseDir: "/path/to/my-custom-project"
+#         projectKey: "my-custom-project"
+#         projectName: "my-custom-project-name"
+#         projectVersion: "v0.0.1"
+        env:
+          # Needed to get some information about the pull request, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      
+      
+        
+
+          
+  # Process API job
+  ProcessAPI-Job:
+    needs: [ PreJob-Requirement ]
+    if: ${{needs.PreJob-Requirement.outputs.ProcessAPI=='true' && github.event.pull_request.merged == true}}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@v1.1.0
+      with:
+        host: "server-url"
+        login: "key"
+#         projectBaseDir: "/path/to/my-custom-project"
+#         projectKey: "my-custom-project"
+#         projectName: "my-custom-project-name"
+#         projectVersion: "v0.0.1"
+        env:
+          # Needed to get some information about the pull request, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+        
+          
+  SystemAPI-Job:
+    needs: [ PreJob-Requirement ]
+    if: ${{needs.PreJob-Requirement.outputs.SystemAPI=='true' && github.event.pull_request.merged == true}}
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: SonarQube Scan
+      uses: kitabisa/sonarqube-action@v1.1.0
+      with:
+        host: "server-url"
+        login: "key"
+#         projectBaseDir: "/path/to/my-custom-project"
+#         projectKey: "my-custom-project"
+#         projectName: "my-custom-project-name"
+#         projectVersion: "v0.0.1"
+        env:
+          # Needed to get some information about the pull request, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
