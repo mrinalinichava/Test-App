@@ -5,7 +5,7 @@ on:
   # Triggers the workflow on push or pull request events but only for the master branch
   pull_request:
     branches: [main]
-    types: [ closed ]
+    types: [ opened ]
 # Allows you to run this workflow manually from the Actions tab
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -68,13 +68,13 @@ jobs:
         projectKey: "proj-1"
         projectName: "name-1"
 #         projectVersion: "v0.0.1"
-        env:
+      env:
           # Needed to get some information about the pull request, if any
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-    Test-App2-Job:
+  Test-App2-Job:
     needs: [ PreJob-Requirement ]
     if: ${{needs.PreJob-Requirement.outputs.TestApp1=='true'}}
     runs-on: ubuntu-latest
@@ -89,14 +89,14 @@ jobs:
         projectKey: "proj-2"
         projectName: "name-2"
 #         projectVersion: "v0.0.1"
-        env:
+      env:
           # Needed to get some information about the pull request, if any
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
-    Test-App3-Job:
+  Test-App3-Job:
     needs: [ PreJob-Requirement ]
     if: ${{needs.PreJob-Requirement.outputs.TestApp1=='true'}}
     runs-on: ubuntu-latest
@@ -111,8 +111,8 @@ jobs:
         projectKey: "proj-3"
         projectName: "name-3"
 #         projectVersion: "v0.0.1"
-        env:
+      env:
           # Needed to get some information about the pull request, if any
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
