@@ -68,11 +68,6 @@ jobs:
         projectKey: "proj-1"
         projectName: "name-1"
 #         projectVersion: "v0.0.1"
-      env:
-          # Needed to get some information about the pull request, if any
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   Test-App2-Job:
     needs: [ PreJob-Requirement ]
@@ -89,11 +84,7 @@ jobs:
         projectKey: "proj-2"
         projectName: "name-2"
 #         projectVersion: "v0.0.1"
-      env:
-          # Needed to get some information about the pull request, if any
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
 
 
   Test-App3-Job:
@@ -111,8 +102,4 @@ jobs:
         projectKey: "proj-3"
         projectName: "name-3"
 #         projectVersion: "v0.0.1"
-      env:
-          # Needed to get some information about the pull request, if any
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # SonarCloud access token should be generated from https://sonarcloud.io/account/security/
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
