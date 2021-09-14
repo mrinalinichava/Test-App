@@ -260,8 +260,8 @@ under the License.
 			<activeByDefault>true</activeByDefault>
         </activation>
 		<properties>
-			<sonar.host.url>http://ec2-44-192-64-168.compute-1.amazonaws.com:9000</sonar.host.url>
-			<sonar.login>deeabed5497c362a58cc610f23144c193be4ee7c</sonar.login>
+			<sonar.host.url></sonar.host.url>
+			<sonar.login></sonar.login>
 		</properties>
 	</profile>
   </profiles>
