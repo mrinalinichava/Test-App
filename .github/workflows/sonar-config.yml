@@ -63,7 +63,7 @@ jobs:
       uses: kitabisa/sonarqube-action@v1.1.0
       with:
         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
-        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
+        login: "deeabedi5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app1
         projectKey: "proj-1"
         projectName: "name-1"
@@ -71,7 +71,7 @@ jobs:
 
   Test-App2-Job:
     needs: [ PreJob-Requirement ]
-    if: ${{needs.PreJob-Requirement.outputs.TestApp1=='true'}}
+    if: ${{needs.PreJob-Requirement.outputs.TestApp2=='true'}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -79,7 +79,7 @@ jobs:
       uses: kitabisa/sonarqube-action@v1.1.0
       with:
         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
-        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
+        login: "deeabedi5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app2
         projectKey: "proj-2"
         projectName: "name-2"
@@ -89,7 +89,7 @@ jobs:
 
   Test-App3-Job:
     needs: [ PreJob-Requirement ]
-    if: ${{needs.PreJob-Requirement.outputs.TestApp1=='true'}}
+    if: ${{needs.PreJob-Requirement.outputs.TestApp3=='true'}}
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -97,7 +97,7 @@ jobs:
       uses: kitabisa/sonarqube-action@v1.1.0
       with:
         host: "http://ec2-44-192-64-168.compute-1.amazonaws.com:9000"
-        login: "deeabed5497c362a58cc610f23144c193be4ee7c"
+        login: "deeabedi5497c362a58cc610f23144c193be4ee7c"
         projectBaseDir: ./test-app3
         projectKey: "proj-3"
         projectName: "name-3"
